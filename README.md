@@ -6,7 +6,7 @@ writed by BASH.
 
 ## install
 
-1. download the file [`github-repos-fun.sh`](./github-repos-fun.sh)  
+1. download (or just copy) the file [`github-repos-fun.sh`](./github-repos-fun.sh)  
 2. move it to path `/etc/profile.d`
 3. run cmd `. /etc/profile`
 
