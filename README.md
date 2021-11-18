@@ -2,7 +2,7 @@
 
 clone all repos from a user.
 
-writed by BASH.
+writed in `BASH`, just a simple tool.
 
 ## install
 
