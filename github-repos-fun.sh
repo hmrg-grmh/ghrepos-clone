@@ -82,7 +82,7 @@ HELPDOC
         jq '.[]|.full_name' |
         tee -a -- /dev/stderr |
         xargs -i -P0 -- bash -c '
-            git clone -q -- '"$proxy"'/{}.git {} &&
+            git clone -q -- '"'$proxy'"'/{}.git {} &&
             { echo :ok :gh :: {} ;; "$(date +%FT%T.%3N%:::z)" ; } ||
             { echo :err :gh :: {} ; }' |
         tee gh-cloning-repos."$u".log ;
