@@ -1,4 +1,4 @@
-# GitHub Repos Clone
+# GitHub Repos Cloner
 
 clone all repos from a user.
 
