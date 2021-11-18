@@ -14,7 +14,7 @@ and you can run `ghrepos-clone` to see the doc.
 
 ## requires
 
-In your environment, you must install these commands at first if they are not be:
+In your environment, you must install these commands at first which if not be:
 
 - `bash`
 - `tee`
