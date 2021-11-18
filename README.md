@@ -10,7 +10,7 @@ writed by BASH.
 2. move it to path `/etc/profile.d`
 3. run cmd `. /etc/profile`
 
-and you can run `ghrepos-clone` to see the doc.
+Then you can run `ghrepos-clone` to see the doc and use it!
 
 ## requires
 
