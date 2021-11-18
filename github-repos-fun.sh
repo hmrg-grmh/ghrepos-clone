@@ -77,6 +77,7 @@ HELPDOC
     
     
     `# code`
+    
     curl https://api.github.com/users/"$u"/repos?per_page="$per"\&page="$p" |
         jq '.[]|.full_name' |
         tee -a -- /dev/stderr |
