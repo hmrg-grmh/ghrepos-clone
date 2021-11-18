@@ -12,9 +12,9 @@ writed by BASH.
 
 and you can run `ghrepos-clone` to see the doc.
 
-## require
+## requires
 
-you need to install these at first if it is not:
+In your environment, you must install these at first if it is not:
 
 - `bash`
 - `tee`
