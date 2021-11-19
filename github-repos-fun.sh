@@ -5,7 +5,8 @@ ghrepos-clone ()
     u="${1:-firecracker-microvm}" \
     p="${2:-1}" \
     per="${3:-100}" \
-    proxy="${4:-https://ghproxy.com/https://github.com}" ;
+    proxy="${4:-https://ghproxy.com/https://github.com}" \
+    type="${5:-}" ;
     
     
     
@@ -28,19 +29,21 @@ Required Commands:
 
 Usage:
 
-  CMD           \$1                 \$2           \$3                        \$4
-  -------       ------             -----        -----                     -----
-  ghrepos-clone <github-user-name> [which page] [how much repos per page] [proxy]
+  CMD           \$1                 \$2           \$3                        \$4      \$5
+  -------       ------             -----        -----                     -----   -----
+  ghrepos-clone <github-user-name> [which page] [how much repos per page] [proxy] [type]
   
   
   default value is:
     
     ______                     ______
-    which page :               $p
+    which page :               ${p:-<nil>}
     ______                     ______
-    how much repos per page :  $per
+    how much repos per page :  ${per:-<nil>}
     ______                     ______
-    proxy :                    $proxy
+    proxy :                    ${proxy:-<nil>}
+    ______                     ______
+    type :                     ${type:-<nil>}
   
   
   demo
@@ -58,6 +61,11 @@ Usage:
   - or you just wans to change the proxy maybe as \`https://gghhhub.iioo\`, you can run this :
     
     ghrepos-clone $u '' '' https://gghhhub.iioo
+    
+    
+  - or if you just wans to download the wiki :
+    
+    ghrepos-clone $u '' '' '' wiki
     
     
   
@@ -80,6 +88,7 @@ HELPDOC
     
     curl https://api.github.com/users/"$u"/repos?per_page="$per"\&page="$p" |
         jq '.[]|.full_name' |
+        xargs -i -- echo "{}${type:+.$type}"
         tee -a -- /dev/stderr |
         xargs -i -P0 -- bash -c '
             git clone -q -- '"'$proxy'"'/{}.git {} &&
