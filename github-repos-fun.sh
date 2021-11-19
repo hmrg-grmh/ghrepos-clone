@@ -88,11 +88,11 @@ HELPDOC
     
     curl https://api.github.com/users/"$u"/repos?per_page="$per"\&page="$p" |
         jq '.[]|.full_name' |
-        xargs -i -- echo "{}${type:+.$type}"
+        xargs -i -- echo "{}${type:+.$type}" |
         tee -a -- /dev/stderr |
-        xargs -i -P0 -- bash -c '
+        xargs -i -P1 -- bash -c '
             git clone -q -- '"'$proxy'"'/{}.git {} &&
-            { echo :ok :gh :: {} ;; "$(date +%FT%T.%3N%:::z)" ; } ||
+            { echo :ok :gh :: {} ... "$(date +%FT%T.%3N%:::z)" ; } ||
             { echo :err :gh :: {} ; }' |
         tee gh-cloning-repos."$u".log ;
 } ;
