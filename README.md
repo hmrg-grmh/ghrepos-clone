@@ -31,7 +31,26 @@ in the file `/etc/profile` we can also see things like that:
 look, **`Functions and aliases go in /etc/bashrc`**, not the `profile`.  
 ( and in `sh`, function name can not be like `foo-bar`. )  
 
-... well, in fact, you can also only copy the codes to use on the bash, with out the init/install. .... when you need it.
+**But, `/etc/bash_completion.d` is not very currect also, it just works ...**
+
+you can add it to your `~/.bashrc`, or run this if you would like to create a `/etc/bashrc.d` :
+
+~~~~ bash
+bashrc-dir-init ()
+{
+    echo '
+
+## bashrc.d
+[[ -d /etc/bashrc.d ]] || { mkdir -p -- /etc/bashrc.d ; touch /etc/bashrc.d/{_.bash,_.sh} ; } ; (cd /etc/bashrc.d && ls -1b -- _.* | tr -- _ \* | xargs | tr -- \  , | xargs -i -- bash -c '"'"'ls -1bd -- /etc/bashrc.d/{{}}'"'"') | while read f ; do source "$f" ; done 
+' >> /etc/bashrc &&
+    . /etc/bashrc ;
+} &&
+sudo bash -c "$(declare -f bashrc-dir-init) ; (bashrc-dir-init) ; exit "'$? ;'
+~~~~
+
+and you can add some file like `_.foo`, then your `/etc/bashrc` will `source` the files named `*.foo` under the dir `/etc/bashrc.d` .
+
+***Well ... I suggest you source it manually if you don't like put it under `/etc/bash_completion.d` .***
 
 ## requires
 
