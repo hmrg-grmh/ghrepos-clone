@@ -31,7 +31,7 @@ in the file `/etc/profile` we can also see things like that:
 look, **`Functions and aliases go in /etc/bashrc`**, not the `profile`.  
 ( and in `sh`, function name can not be like `foo-bar`. )  
 
-**But, `/etc/bash_completion.d` is not very currect also, it just works ...**
+***But, `/etc/bash_completion.d` is not very currect also, it just works ...***
 
 you can add it to your `~/.bashrc`, or run this if you would like to create a `/etc/bashrc.d` :
 
