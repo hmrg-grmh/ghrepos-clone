@@ -72,9 +72,9 @@ Usage:
   
   - clone single repo 
     such as \`zettlr/zettlr\` :
-
+    
     ghrepos-clone zettlr/zettlr
-
+    
   
   
   And if you need flag like \`--depth\` for \`git clone\` command ,
@@ -114,10 +114,9 @@ HELPDOC
         { echo :e :gh :: "$n" ; } |
             tee -a gh-cloning-repos."$(dirname "$n")".log ;
     } ;
-
+    
+    
     `# run`
-
-    (("$(expr length "$(dirname "$n")")" != 0)) &&
-    { repo_ ; } || { repos_ ; } ;
+    case "$n" in */*) repo_ ;; *) repos_ ;; esac ;
 } ;
 
