@@ -55,7 +55,7 @@
        { echo :succ cd ... "${1:-0}" ; } ||
        { echo :fail cd ... "${1:-0}" ; exec bash -c "$(declare -f cd_retring) ; cd_retring '$((n+1))'" ; } ;
    } ;
-   ~~~
+   ~~~~
    
    使用：
    
