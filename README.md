@@ -15,6 +15,19 @@ Or just start a new Bash, as like as run the command `exec bash`
 
 Then, you can run `ghrepos-clone` to see the help doc, and use it!
 
+e.g.
+
+~~~~ sh
+# install
+(cd /etc/bash_completion.d && wget https://ghproxy.com/https://raw.githubusercontent.com/hmrg-grmh/ghrepos-cloner/main/github-repos-fun.bash) &&
+# init
+exec bash
+# see help
+ghrepos-clone
+# and you will see the outputs ;)
+~~~~
+
+
 ## attention
 
 Do not let this file into `/etc/profile.d` **or you will get problem when you use `sh`!!**  
@@ -31,9 +44,12 @@ in the file `/etc/profile` we can also see things like that:
 look, **`Functions and aliases go in /etc/bashrc`**, not the `profile`.  
 ( and in `sh`, function name can not be like `foo-bar`. )  
 
-***But, `/etc/bash_completion.d` is not very currect also, it just works ...***
+## other way to install
 
-you can add it to your `~/.bashrc`, or run this if you would like to create a `/etc/bashrc.d` :
+***see the head in `/etc/profile` , it let us **`Functions and aliases go in /etc/bashrc`**, so maybe add to `/etc/bash_completion.d` is not very currect also ... it just works .***
+
+so, you can add it to your `~/.bashrc`,   
+**or run this if you would like to create a `/etc/bashrc.d` such as that** :
 
 ~~~~ bash
 bashrc-dir-init ()
@@ -48,9 +64,9 @@ bashrc-dir-init ()
 sudo bash -c "$(declare -f bashrc-dir-init) ; (bashrc-dir-init) ; exit "'$? ;'
 ~~~~
 
-and you can add some file like `_.foo`, then your `/etc/bashrc` will `source` the files named `*.foo` under the dir `/etc/bashrc.d` .
+and you can add some file like `_.foo`, then your `/etc/bashrc` will `source` the files named `*.foo` under the dir `/etc/bashrc.d` **also** !! 🙃
 
-***Well ... I suggest you source it manually if you don't like put it under `/etc/bash_completion.d` .***
+***Well ... infact, I suggest you source it manually if you don't like put it under `/etc/bash_completion.d` .***
 
 ## requires
 
