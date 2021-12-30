@@ -8,7 +8,8 @@ ghrepos-clone ()
     proxy="${4:-https://ghproxy.com/https://github.com}" \
     type="${5:-}" ;
     
-    
+    GHRP_C_PAR="${GHRP_C_PAR:-1}" ;
+
     
     
     `# doc`
@@ -71,14 +72,15 @@ Usage:
     
   
   - clone single repo 
-    such as \`zettlr/zettlr\` :
+    such as \`zettlr/zettlr\` or \`cisco/ChezScheme\` in depth 1 :
     
     ghrepos-clone zettlr/zettlr
+    ghrepos-clone cisco/ChezScheme --depth=1
     
   
   
-  And if you need flag like \`--depth\` for \`git clone\` command ,
-  You may need to change the codes under '\`# code\`' in these codes .
+  And the value of GHRP_C_PAR will be the parallel num of gloning repos .
+  You can set it like \`export GHRP_C_PAR=2\` , default is 1 .
   
 
 %%%% doc here over %%%%
@@ -96,11 +98,13 @@ HELPDOC
     
     repos_ ()
     {
+        echo GHRP_C_PAR: "$GHRP_C_PAR" >&2 &&
+
         curl https://api.github.com/users/"$n"/repos?per_page="$per"\&page="$p" |
             jq '.[]|.full_name' |
             xargs -i -- echo "{}${type:+.$type}" |
             tee -a -- /dev/stderr |
-            xargs -i -P1 -- bash -c '
+            xargs -i -P"$GHRP_C_PAR" -- bash -c '
                 git clone -q -- '"'$proxy'"'/{}.git {} &&
                 { echo :ok :gh :: {} ... "$(date +%FT%T.%3N%:::z)" ; } ||
                 { echo :err :gh :: {} ; }' |
@@ -109,14 +113,15 @@ HELPDOC
     
     repo_ ()
     {
-        git clone -- "$proxy"/"$n".git "$n" &&
+        shift 1 &&
+        git clone "$@" -- "$proxy"/"$n".git "$n" &&
         { echo :o :gh :: "$n" .. "$(date +%FT%T.%3N%:::z)" ; } ||
         { echo :e :gh :: "$n" ; } |
-            tee -a gh-cloning-repos."$(dirname "$n")".log ;
+            tee -a -- gh-cloning-repos."$(dirname "$n")".log ;
     } ;
     
     
     `# run`
-    case "$n" in */*) repo_ ;; *) repos_ ;; esac ;
+    case "$n" in */*) repo_ "$@" ;; *) repos_ ;; esac ;
 } ;
 
